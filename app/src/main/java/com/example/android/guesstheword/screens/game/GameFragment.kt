@@ -34,12 +34,15 @@ class GameFragment : Fragment() {
         //viewModel = ViewModelProviders.of(this).get(GameViewModel::class.java)
         viewModel = ViewModelProvider(this).get(GameViewModel::class.java)
 
-        binding.correctButton.setOnClickListener {
-            viewModel.onCorrect()
-        }
-        binding.skipButton.setOnClickListener {
-            viewModel.onSkip()
-        }
+        binding.gameViewModel = viewModel
+
+        // Connected directly from the game_fragment
+//        binding.correctButton.setOnClickListener {
+//            viewModel.onCorrect()
+//        }
+//        binding.skipButton.setOnClickListener {
+//            viewModel.onSkip()
+//        }
         viewModelObservers()
         return binding.root
 
