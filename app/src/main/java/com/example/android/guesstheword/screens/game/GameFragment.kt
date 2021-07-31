@@ -54,11 +54,18 @@ class GameFragment : Fragment() {
         viewModel.word.observe(viewLifecycleOwner, Observer { newValue ->
             binding.wordText.text = newValue
         })
+
+        viewModel.eventGameFinish.observe(viewLifecycleOwner, Observer { newValue ->
+            if (newValue) {
+                gameFinished()
+            }
+        })
     }
 
     private fun gameFinished() {
         val action = GameFragmentDirections.actionGameToScore(viewModel.score.value as Int)
         findNavController(this).navigate(action)
+        viewModel.onGameFinishedComplete()
     }
 
 }
