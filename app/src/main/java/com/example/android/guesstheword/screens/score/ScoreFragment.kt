@@ -1,7 +1,6 @@
 package com.example.android.guesstheword.screens.score
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -42,6 +41,7 @@ class ScoreFragment : Fragment() {
         viewModel = ViewModelProvider(this, viewModelFactory).get(ScoreViewModel::class.java)
 
         binding.scoreViewModel = viewModel
+        binding.setLifecycleOwner(this)
 
         viewModelObservers()
 
@@ -53,10 +53,10 @@ class ScoreFragment : Fragment() {
     }
 
     fun viewModelObservers() {
-        viewModel.score.observe(viewLifecycleOwner, Observer { newScore ->
-            binding.scoreText.text = newScore.toString()
-            Log.d("ATM", "Score is $newScore")
-        })
+//        viewModel.score.observe(viewLifecycleOwner, Observer { newScore ->
+//            binding.scoreText.text = newScore.toString()
+//            Log.d("ATM", "Score is $newScore")
+//        })
 
         viewModel.eventPLayAgain.observe(viewLifecycleOwner, Observer { playAgain ->
             if (playAgain) {

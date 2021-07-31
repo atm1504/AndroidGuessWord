@@ -35,6 +35,7 @@ class GameFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(GameViewModel::class.java)
 
         binding.gameViewModel = viewModel
+        binding.setLifecycleOwner(this)
 
         // Connected directly from the game_fragment
 //        binding.correctButton.setOnClickListener {
@@ -49,13 +50,14 @@ class GameFragment : Fragment() {
     }
 
     private fun viewModelObservers() {
-        viewModel.score.observe(viewLifecycleOwner, Observer { newValue ->
-            binding.scoreText.text = newValue.toString()
-        })
-
-        viewModel.word.observe(viewLifecycleOwner, Observer { newValue ->
-            binding.wordText.text = newValue
-        })
+        // Showing data into TextView directly by using binding
+//        viewModel.score.observe(viewLifecycleOwner, Observer { newValue ->
+//            binding.scoreText.text = newValue.toString()
+//        })
+//
+//        viewModel.word.observe(viewLifecycleOwner, Observer { newValue ->
+//            binding.wordText.text = newValue
+//        })
 
         viewModel.eventGameFinish.observe(viewLifecycleOwner, Observer { newValue ->
             if (newValue) {
