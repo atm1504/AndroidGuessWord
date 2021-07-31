@@ -34,25 +34,30 @@ class GameFragment : Fragment() {
         //viewModel = ViewModelProviders.of(this).get(GameViewModel::class.java)
         viewModel = ViewModelProvider(this).get(GameViewModel::class.java)
 
-        binding.correctButton.setOnClickListener {
-            viewModel.onCorrect()
-        }
-        binding.skipButton.setOnClickListener {
-            viewModel.onSkip()
-        }
+        binding.gameViewModel = viewModel
+        binding.setLifecycleOwner(this)
+
+        // Connected directly from the game_fragment
+//        binding.correctButton.setOnClickListener {
+//            viewModel.onCorrect()
+//        }
+//        binding.skipButton.setOnClickListener {
+//            viewModel.onSkip()
+//        }
         viewModelObservers()
         return binding.root
 
     }
 
     private fun viewModelObservers() {
-        viewModel.score.observe(viewLifecycleOwner, Observer { newValue ->
-            binding.scoreText.text = newValue.toString()
-        })
-
-        viewModel.word.observe(viewLifecycleOwner, Observer { newValue ->
-            binding.wordText.text = newValue
-        })
+        // Showing data into TextView directly by using binding
+//        viewModel.score.observe(viewLifecycleOwner, Observer { newValue ->
+//            binding.scoreText.text = newValue.toString()
+//        })
+//
+//        viewModel.word.observe(viewLifecycleOwner, Observer { newValue ->
+//            binding.wordText.text = newValue
+//        })
 
         viewModel.eventGameFinish.observe(viewLifecycleOwner, Observer { newValue ->
             if (newValue) {
